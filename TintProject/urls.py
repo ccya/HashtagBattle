@@ -7,7 +7,7 @@ admin.autodiscover()
 
 
 urlpatterns = patterns('',
-	url(r'^search-form/$', views.search_form),
+	url(r'^$', views.search_form),
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^start/$', views.start),
 	url(r'^display/$', views.display),
