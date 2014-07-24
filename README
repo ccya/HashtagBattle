@@ -28,8 +28,22 @@ $ python manage.py syncdb
 7) tweepy $ pip install tweepy
 ----------------------------------------------------------------
 Second Step:
-1 Change directory to the outer 'TintProject' directory
-2 Start celery worker service:
+1) Download the code.
+
+2) If the structure is :
+home/usr/workplace/TintProject/
+------------------/manage.py--/
+------------------------------/TintProject
+------------------------------/Hashtag
+------------------------------/static
+------------------------------/templates
+
+Change directory to the outer 'TintProject' directory, i.e 'home/ysr/workplace/TintProject'
+
+3) Start celery worker service:
 $ celery -A TintProject  worker --loglevel info --autoscale=20,10
-3 Run Django:
+
+4) Run Django:
 $ python manage.py celery runserver
+
+5) Then, go to 'http://127.0.0.1:8000/''

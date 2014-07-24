@@ -1,0 +1,493 @@
+%
+% ML final project writeup
+%
+
+\documentclass[11pt,letterpaper]{article}
+\usepackage{naaclhlt2010}
+\usepackage{listings}
+\usepackage{varioref}
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage{color}
+\setlength\titlebox{6.5cm}    % Expanding the titlebox
+
+\title{Hashtag Battle Project}
+
+\author{Shuya Chu\\
+  {\tt csy.ellie@gmail.com}
+}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+\section{Design}
+
+
+
+
+\section{Main Working}
+\subsection{Feature Generation}
+
+\subsubsection{Data Pre-processing}
+\paragraph{Generating Location Feature}
+
+\section{Results}
+\label{sec:results}
+
+\begin{center}
+   \begin{table}[h]
+    \begin{tabular}{ | l | l  | p{2cm} |}
+    \hline
+     & SVM(RBF) & SVM(linear) \\ \hline
+    correct prediction& 106 & 106  \\ \hline
+    test sample size& 150 &150  \\ \hline
+    accuracy & 70.67\% &70.67\%\\ \hline
+    \end{tabular}
+    \caption{Comparison of SVM with different kernels}
+    \end{table}
+\end{center}
+
+\begin{center}
+   \begin{table}[h]
+    \begin{tabular}{ | l | l  | p{2cm} |}
+    \hline
+     & SVM(RBF) & SVM(linear) \\ \hline
+    correct prediction& 106 & 106  \\ \hline
+    test sample size& 150 &150  \\ \hline
+    accuracy & 70.67\% &70.67\%\\ \hline
+    \end{tabular}
+    \caption{Comparison of SVM after PCA}
+    \end{table}
+\end{center}
+
+It's a little surprising that the prediction remains the same after a reduction of 25\% of original feature space. When one-third feature is left for learning, the number of correct prediction for linear kernel decreases. We think that the sparsity of feature space may cause such result. 
+
+To see whether SVM outperforms other learning algorithms, we test data on Naive Bayes, logistic regress with L1 penalty ,stochastic gradient descent methods . Among all,  naive Bayes method has relative poor performance. What's unexpected is that stochastic gradient algorithm's performance is slight better than SVM in this case. In the following table, we show prediction accuracy with different classification algorithms under full feature space against reduced feature space. By looking at Logistic Regression and Naive Bayes, feature reduction indeed improve performance and filtering out noise in data. 
+\begin{center}
+   \begin{table}[h]
+    \begin{tabular}{ | l | l  | p{2cm} |}
+    \hline
+     & Logistic Reg & Naive Bayes \\ \hline
+    correct prediction& 105 & 99  \\ \hline
+    test sample size& 150 &150  \\ \hline
+    accuracy & 70\% &66\%\\ \hline
+    \end{tabular}
+    \caption{ Logistic Reg and Naive Bayes with full feature space}
+    \end{table}
+\end{center}
+
+\begin{center}
+   \begin{table}[h]
+    \begin{tabular}{ | l | l  | p{2cm} |}
+    \hline
+     & Logistic Reg & Naive Bayes \\ \hline
+    correct prediction& 106 & 102  \\ \hline
+    test sample size& 150 &150  \\ \hline
+    accuracy & 70\% &68\%\\ \hline
+    \end{tabular}
+    \caption{Logistic Reg and Naive Bayes with PCA}
+    \end{table}
+\end{center}
+
+\begin{center}
+   \begin{table}[t]
+    \begin{tabular}{ | l | l  | p{2cm} |}
+    \hline
+     & SGD L1& SGD L2 \\ \hline
+    correct prediction& 99 & 107  \\ \hline
+    test sample size& 150 &150  \\ \hline
+    accuracy & 66\% &71.3\%\\ \hline
+    \end{tabular}
+    \caption{SGD with L1 and L2 regularization in full space}
+    \end{table}
+\end{center}
+
+
+
+\begin{center}
+   \begin{table}
+    \begin{tabular}{ | l | l  | p{2cm} |}
+    \hline
+     & SGD L1& SGD L2 \\ \hline
+    correct prediction& 104 & 106  \\ \hline
+    test sample size& 150 &150  \\ \hline
+    accuracy & 66\% &71.3\%\\ \hline
+    \end{tabular}
+    \caption{SGD with L1 and L2 regularization in reduced space}
+    \end{table}
+\end{center}
+
+\vspace{-2em}
+\section{Comparison with proposal}
+Compared with what we have mentioned in the proposal, we are able to achieve most of them, except the one that turn model into an application. Now, lets check whether items in Milestones of proposal is completed in this report. 
+\vspace{-1em}
+\begin{description}
+  \item[Must achieve] \hfill \\
+  For "feature construction", "Feature Selection","Apply ML Algorithm", we do complete in section ~\ref{sec:methods}
+  \vspace{-1em}
+  \item[Expected to achieve] \hfill \\
+  For accuracy analysis, we do complete it in section ~\ref{sec:results}
+  \vspace{-1em}
+  \item[Third] \hfill \\
+  We didn't turn it into application successfully, but we instead we come up with an idea of using SVR to give more precise score to reflect one's preference. 
+\end{description}
+
+
+
+\vspace{-2em}
+
+\begin{thebibliography}{}
+\bibitem{MB} M Hu and B Liu. 2014. Mining opinion features in customer reviews. \emph{In Proceedings of the National Conference on Artificial \ldots}  
+\bibitem{GRC} G A Miller, R Beckwith, and C Fellbaum. 1990. Introduction to word net: An on-line lexical database. \emph{International journal \ldots} (1990)
+\bibitem{FP} F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel, B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer, R. Weiss, V. Dubourg, J. Vanderplas, A. Pas- sos, D. Cournapeau, M. Brucher, M. Perrot, and E. Duchesnay. 2011. Scikit-learn: Machine Learning in Python. \emph{Journal of Machine Learning Research} 12 (2011), 2825?2830.
+\bibitem{BVJ} Bryan Hood, Victor Hwang and Jennifer King. 2013. Inferring Future Business Attention.
+
+
+\end{thebibliography}
+
+\section*{Source code}
+\lstset{language=Python,basicstyle=\footnotesize}
+\begin{lstlisting}
+from sklearn import svm
+from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import LogisticRegression
+f = open('../result/features_train')
+g = open('../result/features_dev')
+lines = f.readlines()
+dev_lines = g.readlines()
+Y = []
+X = []
+X_dev = []
+Y_dev = []
+for each in lines[1:]:
+	wl = each.split('|')
+	instance = []
+	for i in xrange(len(wl)):
+		if i == 0:
+			label = wl[i][1]
+			Y.append(int(label))
+		elif i >= 1 and i<=50:
+			instance.append(int(wl[i].rstrip('\n')))
+	#print wl[1]
+	#Y.append(wl[0][1])
+	#instance.append(wl[1])
+	X.append(instance)
+clf = svm.SVC()
+rbf_svm = svm.SVC(kernel='linear')
+clf.fit(X,Y)
+rbf_svm.fit(X,Y)
+gnb = GaussianNB()
+sgd = SGDClassifier(loss="hinge", penalty="l2")
+gnb.fit(X,Y)
+sgd.fit(X,Y)
+clf_l1_LR = LogisticRegression(penalty='l1', tol=0.01)
+clf_l1_LR.fit(X, Y)
+
+
+for each in dev_lines[1:]:
+	wl = each.split('|')
+	instance = []
+	for i in xrange(len(wl)):
+		if i == 0:
+			label = wl[i][1]
+			Y_dev.append(int(label))
+		elif i >= 1 and i<=50:
+			instance.append(int(wl[i].rstrip('\n')))
+	X_dev.append(instance)
+
+result = clf.predict(X_dev)
+result_rbf = rbf_svm.predict(X_dev)
+result_nb = gnb.predict(X_dev)
+result_lg = clf_l1_LR.predict(X_dev)
+result_sgd = sgd.predict(X_dev)
+right = 0
+right = 0
+for i in xrange(len(result)):
+	if result[i] == Y_dev[i]:
+		right += 1 
+print right
+print len(result)
+
+right = 0
+for i in xrange(len(result_rbf)):
+	if result_rbf[i] == Y_dev[i]:
+		right += 1 
+print right
+print len(result_rbf)
+
+right = 0
+for i in xrange(len(result_nb)):
+	# print str(Y_dev[i]) + str(result[i])
+	if result_nb[i] == Y_dev[i]:
+		right += 1 
+print right
+print len(result_nb)
+
+
+right = 0
+for i in xrange(len(result_lg)):
+	# print str(Y_dev[i]) + str(result[i])
+	if result_lg[i] == Y_dev[i]:
+		right += 1 
+print right
+print len(result_lg)
+
+right = 0
+for i in xrange(len(result_sgd)):
+	# print str(Y_dev[i]) + str(result[i])
+	if result_sgd[i] == Y_dev[i]:
+		right += 1 
+print right
+print len(result_sgd)
+
+
+\end{lstlisting}
+
+
+\clearpage
+\lstset{language=Python,basicstyle=\footnotesize}
+\begin{lstlisting}
+import operator
+# f = open('../result/sorted_keywords')
+g = open('../result/keywordpoint')
+points = g.readlines()
+# put the points for keywords in dictionary
+point_dic = {}
+weight_dic = {}
+for each in points:
+	pairs = each.rstrip('\n').split('|')
+	keyword  = pairs[0]
+	weight =  pairs[1] + pairs[2]
+	point_dic.setdefault(keyword, (pairs[1],pairs[2]))
+	weight_dic.setdefault(keyword, weight)
+sorted_weight_dic = sorted(weight_dic.iteritems(), key=operator.itemgetter(1),reverse = True)
+# print sorted_weight_dic[0]
+# set the subset size
+size = 200
+# get the subset keywords and corresponding point
+result = {}
+for i in xrange(size):
+	word = sorted_weight_dic[i][0]
+	if word in point_dic:
+		point = point_dic[word]
+		# print point
+		result.setdefault(word,point)
+	else:
+		result.setdefault(word,(0,0))
+k = open('../result/subset','w+')
+for each in result:
+	value = each + ":" + str(result[each])
+	k.write(value + '\n')
+\end{lstlisting}
+
+\clearpage
+\lstset{language=Python,basicstyle=\footnotesize}
+\begin{lstlisting}
+import re
+import json
+f = open('../result/keywordpoint_train')
+g = open('../result/subset')
+# h = open('../result/sampled_bid')
+h = open('../result/not_sampled_bid')
+m = open('../result/loc_feature')
+# k = open('../result/features_train','w+')
+k = open('../result/features_dev','w+')
+
+#Get labels
+bids = h.readlines()
+bidlist = []
+labels = {}
+for each in bids:
+	bid = each.split(':')[0]
+	label = each.split(':')[1].rstrip('\n')
+	labels[bid] = label
+	bidlist.append(bid)
+
+# Get loc features
+loc_fea = {}
+locinfo = m.readlines()
+for each in locinfo:
+	bid = each.split(' ')[0]
+	fear = each.split(' ')[1].rstrip('\n')
+	loc_fea[bid] = fear
+
+
+# Get dict, key is busid, value is keyword,count pairs. i.e. a dict of dict
+dic = {}
+put = False
+lines = f.readlines()
+for line in lines:
+	if re.match('business_id',line):
+		bid = line.split(" ")[1].rstrip('\n')
+		if bid in bidlist:
+		# if bid not in bidlist:
+			dic[bid] = {}
+			put = True
+		else:
+			put = False
+	else:
+		keyword = line.split('|')[0]
+		p = line.split('|')[1]
+		n = line.split('|')[2].rstrip('\n')
+		if put:
+			if keyword in dic[bid]:
+				dic[bid][keyword] = (int(dic[bid][keyword][0])+int(p),int(dic[bid][keyword][1])+int(n))
+			else:
+				dic[bid][keyword] = (p,n)
+
+#Start to create feature
+
+k.write('label loc ')
+for i in xrange(200):
+	k.write('K' + str(i) +'P K'+str(i) + 'N ')
+kl = []
+keywords = g.readlines()
+for each in keywords:
+	kl.append(each.rstrip('\n').split(":")[0])
+
+for each_bid in dic:
+	k.write('\n' +labels[each_bid])
+	# Y.append(labels[each_bid])
+	k.write('|' + loc_fea[each_bid])
+	instance = [loc_fea[each_bid]]
+	for each_kw in kl:
+		found = False
+		for key in dic[each_bid]:
+			if key in each_kw:
+				value = '|' +str(dic[each_bid][key][0]) + '|' +str(dic[each_bid][key][1])
+				k.write(value)
+\end{lstlisting}
+
+\clearpage
+\lstset{language=Python,basicstyle=\footnotesize}
+\begin{lstlisting}
+import re
+import sys
+
+
+################################################################################
+#------------------Find keyword for all review of ONE usr-----------------------
+f = open('../result/chunck')
+g = open('../result/keywords','w+')
+k = open('../result/adj_keyword','w+')
+keywords_adj = {}
+lines = f.readlines()
+ladj = []
+
+for i in xrange(len(lines)):
+	if re.match("business_id", lines[i]):
+		k.write(lines[i])
+	if re.match("  \(NP",lines[i]):
+		keyword = re.sub(r'NP|/NNP|/NNS|/NN|[()]|', '',lines[i]).rstrip('\n')[3:]
+		if len(keyword)!=0:
+			# g.write(keyword+'\n')
+			k.write(keyword + ":")
+			j = i+1
+			find = True
+			ladj = []
+			while(find):
+				if len(lines[j])<4:
+					if j == len(lines) - 1:
+						find = False
+					else:
+						j = j+1
+				else:
+					if re.search(r'\/JJ',lines[j][-4:]) is not None:
+						adj = re.sub(r'/JJ|/JJS|/JJR','',lines[j]).rstrip('\n')[2:]
+						ladj.append(adj)
+						if keyword in keywords_adj:
+							keywords_adj[keyword].append(adj)
+						else:
+							keywords_adj.setdefault(keyword,[adj])
+						j = j+1
+					elif re.match("  \(NP",lines[j]):
+						find = False
+						k.write(",".join(ladj)+ " \n")
+					elif j == len(lines)-1:
+						find = False
+						k.write(",".join(ladj)+ " \n")
+					elif re.match('business_id',lines[j]):
+						find = False
+						k.write(",".join(ladj)+ " \n")
+					else:
+						j = j+1
+for each in keywords_adj:
+	g.write(each + ':' + (',').join(keywords_adj[each])+ '\n')
+\end{lstlisting}
+
+
+
+\clearpage
+\lstset{language=Python,basicstyle=\footnotesize}
+\begin{lstlisting}
+
+import json
+import math
+import collections
+f = open('../result/bus_loc')
+g = open('../data/yelp_academic_dataset_business.json')
+k = open('../result/loc_feature','w+')
+loc = {}
+alldist = []
+lines = f.readlines()
+latitude = 0
+longtitude = 0
+for each in lines:
+	longtitude += float(each.split(":")[1].split(" ")[1])
+	latitude += float(each.split(":")[2].split(" ")[1])
+center_lat = latitude/774
+center_long = longtitude/774
+
+max = 0.0
+preferd = []
+for each in lines:
+	lon = float(each.split(":")[1].split(" ")[1])
+	lat = float(each.split(":")[2].split(" ")[1])
+	dist = math.sqrt((lat - center_lat)**2 + (lon - center_long)**2)
+	preferd.append(dist)
+sorted_preferd = sorted(preferd)
+
+length = len(sorted_preferd)
+medium_1 = 0.0
+if not length % 2:
+	medium_1 = (sorted_preferd[length/2]+sorted_preferd[length/2-1])/2.0
+else:
+	medium_1 = sorted_preferd[length/2]
+print medium_1
+
+
+for line in g:
+	data = json.loads(line)
+	lat = data["latitude"]
+	lon = data["longitude"]
+	dist = math.sqrt((lat - center_lat)**2 + (lon - center_long)**2)
+	alldist.append(dist)
+	loc[data["business_id"]] = dist
+
+sorted_dist = sorted(alldist)
+
+# length = len(sorted_dist)
+# medium = 0.0
+# if not length % 2:
+# 	medium = (sorted_dist[length/2]+sorted_dist[length/2-1])/2.0
+# else:
+# 	medium = sorted_dist[length/2]
+# print medium
+
+fea_loc = {}
+for each in loc:
+	if loc[each]<medium_1:
+		fea_loc[each] = 0
+	else:
+		fea_loc[each] = 1
+result = collections.OrderedDict(sorted(fea_loc.items()))
+for each in result:
+	k.write(each+ " " + str(fea_loc[each])+"\n")
+\end{lstlisting}
+\end{document}
+
+
