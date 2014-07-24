@@ -24,6 +24,8 @@ Create the celery database tables.
 $ python manage.py syncdb
 
 6) django-bootstrap3 :$ pip install django-bootstrap3
+
+7) tweepy $ pip install tweepy
 ----------------------------------------------------------------
 Second Step:
 1 Change directory to the outer 'TintProject' directory
