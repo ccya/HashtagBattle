@@ -7,35 +7,45 @@
 {% bootstrap_javascript %}
 <link rel="stylesheet" type="text/css" href="{% static 'TintProject/style.css' %}" />
 
-<p>You searched for: <strong>{{ hashtag1.name }}</strong> and <strong>{{hashtag2.name}}</strong></p>
-
-
+<!-- <p>You searched for: <strong>{{ hashtag1.name }}</strong> and <strong>{{hashtag2.name}}</strong></p> -->
 
 {% if hashtag1 and hashtag2 %}
-    <p>Details:</p>
-    
-    <ul>    	
-        <li>{{ hashtag1.name }} : {{ hashtag1.ct }}</li>
-        <li>{{ hashtag2.name }} : {{ hashtag2.ct }}</li>
-    </ul>
+    <!-- <h4><span class="label label-info">details:</span></h4>  -->
+    <div class = "container">
+    <h1 style = "text-align:center">
+      &gt;&gt;&gt;&gt;&gt; HASHTAG BATTLE &lt;&lt;&lt;&lt;&lt;
+    </h1>
+  </div>
+
+<div class = "container">
+
+    <h2>
+      <span class="label label-info" style ="float:right;">{{ hashtag2.name}}: {{hashtag2.ct }}</span>
+    </h2>
+
+    <h2>
+      <span class="label label-danger" style = "float:left;">{{ hashtag1.name}} : {{hashtag1.ct}}</span>
+    </h2>
+
+</div>  
 
 <div class="container fill">
-
     <div class="progress">
       <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow=
       "{{ per }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ per }}%" >
-
       </div>
     </div>
-
 </div>
 
-<form name="myForm" id="myForm" target="_myFrame" action="/display/" method="get">
-  <input type="hidden" name="hashtag1" value= "{{ hashtag1.name }}" />
-  <input type="hidden" name="hashtag2" value= "{{ hashtag2.name }}" />
-<input type="submit"  value="grab">
-</form>
- <button type="button" onclick="revoke()">STOP</button>
+<div class = container>
+  <form name="myForm" id="myForm" target="_myFrame" action="/display/" method="get">
+     <input type="hidden" name="hashtag1" value= "{{ hashtag1.name }}" />
+      <input type="hidden" name="hashtag2" value= "{{ hashtag2.name }}" />
+      <input type="submit" class="btn btn-danger"style = "float:left" value="GRAB">
+  </form>
+  <button type="button" class="btn btn-info" style = "float:right" onclick = "revoke()">STOP</button>
+</div>
+ 
 {% else %}
     <p>Cant find records</p>
 {% endif %}
