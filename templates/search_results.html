@@ -54,7 +54,7 @@ setInterval(function () {document.getElementById("myForm").submit();}, 5000);
 
 <script>
 function revoke() {
-  window.open();
+  // window.open();
   $.get('/revoke/', function (data) {
     alert("stopped!");
   });
