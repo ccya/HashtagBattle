@@ -12,7 +12,12 @@ from TintProject.tasks import update
 from celery import chord
 from django.http import HttpResponse
 
+"""
+    1 Get data from request to render the 'search_results' templates.
+    2 Also compute a percentage var for helping display hashtag1's count VS hastag2's count
+    3 If didn't get enought hashtag name, return an ERROR page
 
+"""
 def display(request):
         if 'hashtag1' in request.GET and request.GET['hashtag1']:
             hashtag1str = request.GET['hashtag1'] 
@@ -29,6 +34,19 @@ def display(request):
         else:
             return HttpResponse("ERROR")
 
+
+"""
+    This function will be called when user click 'start' in "search_form.html".
+
+    It will do two things, first create or clear Hashtag objects to datase and pass 
+    request to display(request) to render 'search_results.html' for initial value;
+    second start a celery worker in line 70 to start collect data by calling collect()
+    in tasks.py
+
+    Note: The celery worker will start 1 sec later after being told to start, this is 
+    to make sure display initial values first before new data written to database.
+
+"""
 def start(request):
     if 'hashtag1' in request.GET and request.GET['hashtag1']:
         hashtag1 = request.GET['hashtag1'] 
@@ -54,10 +72,17 @@ def start(request):
     else:
         return HttpResponse("Not Enought Hashtags")
 
+"""
+    This function will be called when Stop button on 'search_results.html' being clicked.
+    It will tell the collecting celery worker to stop.
+"""
 def revoke(request):
     revoke_worker.apply_async(countdown=1)
     return HttpResponse("worker closed")
 
+"""
+    This is to render entry page for this app
+"""
 def search_form(request):
     return render(request, 'search.html')
 
