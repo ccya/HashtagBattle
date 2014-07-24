@@ -1,0 +1,33 @@
+----------------------------------------------------------------------------
+First Step:
+In order to run this app locally, the following package should be installed.
+
+1) python 2.7
+
+2) django:  $ sudo pip install Django
+
+3) celery:  $ pip install celery
+
+4) RabbitMQ:
+$ sudo apt-get install rabbitmq-server
+After installation, run the following command to create user and set permissions
+$ sudo rabbitmqctl add_user myuser mypassword
+$ sudo rabbitmqctl add_vhost myvhost
+$ sudo rabbitmqctl set_permissions -p myvhost myuser ".*" ".*" ".*"
+
+(Start rabbit service)
+$ sudo rabbitmq-server
+
+5) djcelery :
+$ pip install django-celery
+Create the celery database tables.
+$ python manage.py syncdb
+
+6) django-bootstrap3 :$ pip install django-bootstrap3
+----------------------------------------------------------------
+Second Step:
+1 Change directory to the outer 'TintProject' directory
+2 Start celery worker service:
+$ celery -A TintProject  worker --loglevel info --autoscale=20,10
+3 Run Django:
+$ python manage.py celery runserver
