@@ -1,0 +1,54 @@
+
+{% load staticfiles %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<link rel="stylesheet" type="text/css" href="{% static 'TintProject/style.css' %}" />
+
+<p>You searched for: <strong>{{ hashtag1.name }}</strong> and <strong>{{hashtag2.name}}</strong></p>
+
+
+
+{% if hashtag1 and hashtag2 %}
+    <p>Details:</p>
+    
+    <ul>    	
+        <li>{{ hashtag1.name }} : {{ hashtag1.ct }}</li>
+        <li>{{ hashtag2.name }} : {{ hashtag2.ct }}</li>
+    </ul>
+
+<div class="container fill">
+
+    <div class="progress">
+      <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow=
+      "{{ per }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ per }}%" >
+
+      </div>
+    </div>
+
+</div>
+
+<form name="myForm" id="myForm" target="_myFrame" action="/display/" method="get">
+  <input type="hidden" name="hashtag1" value= "{{ hashtag1.name }}" />
+  <input type="hidden" name="hashtag2" value= "{{ hashtag2.name }}" />
+<input type="submit"  value="grab">
+</form>
+ <button type="button" onclick="revoke()">STOP</button>
+{% else %}
+    <p>Cant find records</p>
+{% endif %}
+
+<script>
+setInterval(function () {document.getElementById("myForm").submit();}, 5000);
+</script>
+
+<script>
+function revoke() {
+  window.open();
+  $.get('/revoke/', function (data) {
+    alert("stopped!");
+  });
+}
+</script>
